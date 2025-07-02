@@ -11,17 +11,19 @@ import { WorkoutModule } from './workout/workout.module';
     ConfigModule.forRoot({
       isGlobal: true, // makes env vars available app-wide
     }),
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: process.env.DATABASE_HOST || 'postgres',
+    TypeOrmModule.forRootAsync({
+  useFactory: () => ({
+    type: 'postgres',
+    host: process.env.DATABASE_HOST || 'localhost',
+    port: parseInt(process.env.DATABASE_PORT || '5432', 10),
+    username: process.env.DATABASE_USERNAME || 'postgres',
+    password: process.env.DATABASE_PASSWORD || 'password',
+    database: process.env.DATABASE_NAME || 'gymtrackr',
+    autoLoadEntities: true,
+    synchronize: true,
+  }),
+}),
 
-      port: 5432,
-      username: 'postgres',
-      password: 'meme3199',
-      database: 'gymtrackr',
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
     JwtModule.register({}), // can be left empty if you use JwtStrategy
     UserModule,
     WorkoutModule,
