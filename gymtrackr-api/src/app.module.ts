@@ -13,7 +13,8 @@ import { WorkoutModule } from './workout/workout.module';
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: process.env.DATABASE_HOST || 'postgres',
+
       port: 5432,
       username: 'postgres',
       password: 'meme3199',
