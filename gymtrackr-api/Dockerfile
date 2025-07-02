@@ -1,3 +1,4 @@
+# gymtrackr-api/Dockerfile
 
 FROM node:18
 
@@ -11,3 +12,4 @@ COPY . .
 RUN npm run build
 
 CMD ["npm", "run", "start:prod"]
+

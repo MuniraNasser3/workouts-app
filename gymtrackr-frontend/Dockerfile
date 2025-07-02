@@ -1,4 +1,5 @@
-# frontend/Dockerfile
+# gymtrackr-frontend/Dockerfile
+
 FROM node:18
 
 WORKDIR /app
@@ -10,6 +11,6 @@ COPY . .
 
 RUN npm run build
 
-# Serve using a simple server
 RUN npm install -g serve
+
 CMD ["serve", "-s", "dist", "-l", "5173"]
