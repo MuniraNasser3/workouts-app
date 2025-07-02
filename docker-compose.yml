@@ -1,0 +1,38 @@
+
+
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: meme3199
+      POSTGRES_DB: gymtrackr
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  backend:
+    build: ./gymtrackr-api
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgres://postgres:meme3199@postgres:5432/gymtrackr
+      JWT_SECRET: your_jwt_secret_key
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    build: ./gymtrackr-frontend
+    depends_on:
+      - backend
+    ports:
+      - '5173:5173'
+    volumes:
+      - ./frontend:/app
+volumes:
+  pgdata:
+   
