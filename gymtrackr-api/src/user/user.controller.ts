@@ -20,7 +20,7 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
-  @Get('me')
+  @Get('me') // me :  refers to the currently authenticated user
   getProfile(@Request() req) {
     return this.userService.findById(req.user.userId);
   }
