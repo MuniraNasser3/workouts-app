@@ -12,7 +12,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
   imports: [
     TypeOrmModule.forFeature([User]),
     PassportModule,
-    ConfigModule, // ✅ make .env available
+    ConfigModule, // make .env available
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

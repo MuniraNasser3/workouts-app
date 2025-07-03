@@ -13,7 +13,7 @@ export class WorkoutService {
   ) {}
 
   
-  // ✅ Create a workout and link it to the user
+  // Create a workout and link it to the user
 async create(data: CreateWorkoutDto, user: { userId: number }) {
   const fullUser = await this.workoutRepo.manager.findOne(User, {
     where: { id: user.userId },
@@ -48,7 +48,7 @@ async create(data: CreateWorkoutDto, user: { userId: number }) {
 
 
   
-  // ✅ Get all workouts for a specific user
+  // Get all workouts for a specific user
   findByUser(userId: number) {
     return this.workoutRepo.find({
       where: { user: { id: userId } },
@@ -56,14 +56,14 @@ async create(data: CreateWorkoutDto, user: { userId: number }) {
     });
   }
 
-  // ✅ Get one workout owned by user
+  //  Get one workout owned by user
   findOneForUser(id: number, userId: number) {
     return this.workoutRepo.findOne({
       where: { id, user: { id: userId } },
     });
   }
 
-  // ✅ Update a workout if it belongs to the user
+  //  Update a workout if it belongs to the user
   async updateForUser(id: number, data: Partial<CreateWorkoutDto>, userId: number) {
     const workout = await this.findOneForUser(id, userId);
     if (!workout) return null;
@@ -72,7 +72,7 @@ async create(data: CreateWorkoutDto, user: { userId: number }) {
     return this.workoutRepo.save(workout);
   }
 
-  // ✅ Delete a workout if it belongs to the user
+  //  Delete a workout if it belongs to the user
   async removeForUser(id: number, userId: number) {
     const workout = await this.findOneForUser(id, userId);
     if (!workout) return null;

@@ -63,12 +63,12 @@ export class UserService {
     };
   }
 
-  // Get profile of the current user
+  // Get profile of the current user (not in The frontend)
   async findById(id: number) {
     return this.userRepository.findOne({ where: { id } });
   }
 
-  // Update name or weight of current user
+  // Update name or weight of current user (not in The frontend)
   async updateUser(id: number, data: UpdateUserDto) {
     await this.userRepository.update({ id }, data);
     return this.findById(id); // Return updated user
